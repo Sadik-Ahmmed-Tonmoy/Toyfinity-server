@@ -6,7 +6,14 @@ require('dotenv').config();
 const port = process.env.PORT || 5000;
 
 // middleWare
-app.use(cors())
+// app.use(cors())
+const corsOptions ={
+  origin:'*', 
+  credentials:true,
+  optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lw1wxb4.mongodb.net/?retryWrites=true&w=majority`;
@@ -32,7 +39,7 @@ async function run() {
     //     return;
     //   }
     // });
- await client.connect()
+//  await client.connect()
     const reactTabDataCollection = client.db("toyfinityManager").collection("toy")
     const toysCollection = client.db("toyManager").collection("toys");
     // Creating index on two fields
